@@ -1,5 +1,19 @@
 # node-project
 Empty node project using continuous integration tools to ensure code quality.
+## Creating new project
+```
+export PROJECT_DIRECTORY="<project directory>"; \
+export GIT_REPOSITORY="git@github.com:<github user>/<github repository>.git"; \
+git clone git@github.com:petitchevalroux/node-project.git $PROJECT_DIRECTORY; \
+cd $PROJECT_DIRECTORY; \
+git remote remove origin; \
+git remote add origin $GIT_REPOSITORY; \
+git remote add node-project git@github.com:petitchevalroux/node-project.git; \
+make install-git-hook;
+```
+
+/!\ DO NOT FORGET TO UPGRADE YOUR package.json/!\
+
 ## Make commands
 ### Install
 Install dependencies
