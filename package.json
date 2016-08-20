@@ -20,6 +20,7 @@
     "eslint-plugin-promise": "^2.0.1",
     "istanbul": "^0.4.4",
     "js-beautify": "^1.6.3",
-    "mocha": "^3.0.2"
+    "mocha": "^3.0.2",
+    "sinon": "^1.17.5"
   }
 }
