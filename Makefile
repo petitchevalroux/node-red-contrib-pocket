@@ -10,6 +10,13 @@ beautify: .build/beautify
 .PHONY: lint
 lint: .build/lint
 
+.PHONY: coverage
+coverage: coverage/lcov.info
+
+.PHONY: report
+report: coverage/lcov-report/index.html
+	open $<
+
 .build/build: Makefile
 	mkdir -p .build && touch $@
 
@@ -46,3 +53,12 @@ $(ESLINT): .build/install
 	$(eval FILES := $(filter-out .build/build, $(filter-out $(ESLINT), $?)))
 	test "$(FILES)" = "" || $(ESLINT) $(FILES)
 	touch $@
+
+ISTANBUL=node_modules/.bin/istanbul
+
+$(ISTANBUL): .build/install
+
+coverage/lcov.info: .build/build $(ISTANBUL) $(TEST_FILES) $(SOURCE_FILES)
+	test "$(TEST_FILES)" = "" || $(ISTANBUL) cover $(MOCHA) $(TEST_FILES)
+
+coverage/lcov-report/index.html: coverage

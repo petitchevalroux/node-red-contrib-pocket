@@ -27,3 +27,18 @@ Native promises are forbidden. Promise's good practice are checked using
 ```
 make lint
 ```
+
+### Generate code's coverage files
+Coverage files are generated using istanbul [istanbul](https://github.com/gotwarlost/istanbul).
+They are located in coverage/ directory. You can find lcov.info in coverage/lcov.info.
+```
+make coverage
+```
+
+### Open corerage html report
+Html coverage report is located in coverage/lcov-report/index.html.
+The following command open it in your default browser. Launching this command
+without having tests will fail.
+```
+make report
+```
