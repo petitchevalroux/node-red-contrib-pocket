@@ -17,6 +17,11 @@ coverage: coverage/lcov.info
 report: coverage/lcov-report/index.html
 	open $<
 
+.PHONY: install-git-hook
+install-git-hook:
+	rm -f .git/hooks/pre-commit
+	ln -s ../../git-precommit-hook.sh .git/hooks/pre-commit
+
 .build/build: Makefile
 	mkdir -p .build && touch $@
 

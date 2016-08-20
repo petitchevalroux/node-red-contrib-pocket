@@ -42,3 +42,10 @@ without having tests will fail.
 ```
 make report
 ```
+
+### Install git precommit-hook
+The pre-commit hook is located in git-precommit-hook.sh. The following command
+enable it by creating a symlink from .git/hooks/pre-commit to git-precommit-hook.sh.
+```
+make install-git-hook
+```
