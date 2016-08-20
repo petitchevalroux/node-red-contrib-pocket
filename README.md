@@ -53,3 +53,9 @@ make install-git-hook
 ```
 make clean
 ```
+### Check code coverage
+Code coverage is checked using [istanbul](https://github.com/gotwarlost/istanbul).
+Minimum coverage threshold are 80% by default and can be configured in .istanbul.yml file.
+```
+make check-coverage
+```

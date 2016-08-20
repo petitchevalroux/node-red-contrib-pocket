@@ -22,6 +22,9 @@ install-git-hook:
 	rm -f .git/hooks/pre-commit
 	ln -s ../../git-precommit-hook.sh .git/hooks/pre-commit
 
+.PHONY: check-coverage
+check-coverage: .build/check-coverage
+
 .PHONY: clean
 clean:
 	rm -rf .build node_modules
@@ -72,3 +75,6 @@ coverage/lcov.info: .build/build $(ISTANBUL) $(TEST_FILES) $(SOURCE_FILES)
 	test "$(TEST_FILES)" = "" || $(ISTANBUL) cover $(MOCHA) $(TEST_FILES)
 
 coverage/lcov-report/index.html: coverage
+
+.build/check-coverage: .istanbul.yml coverage
+	$(ISTANBUL) check

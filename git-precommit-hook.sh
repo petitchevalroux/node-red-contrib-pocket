@@ -1,2 +1,2 @@
 #!/bin/sh
-make beautify && make lint && make tests
+make beautify && make lint && make check-coverage
