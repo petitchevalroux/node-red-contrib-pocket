@@ -22,6 +22,10 @@ install-git-hook:
 	rm -f .git/hooks/pre-commit
 	ln -s ../../git-precommit-hook.sh .git/hooks/pre-commit
 
+.PHONY: clean
+clean:
+	rm -rf .build node_modules
+
 .build/build: Makefile
 	mkdir -p .build && touch $@
 

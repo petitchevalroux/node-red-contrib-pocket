@@ -49,3 +49,8 @@ enable it by creating a symlink from .git/hooks/pre-commit to git-precommit-hook
 ```
 make install-git-hook
 ```
+
+### Clean all build and installed files
+```
+make clean
+```
