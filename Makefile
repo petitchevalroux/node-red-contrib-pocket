@@ -28,14 +28,13 @@ install-git-hook:
 .build/install: .build/build package.json
 	npm install && touch $@
 
-MOCHA=node_modules/.bin/_mocha
-ESLINT=node_modules/.bin/eslint
-
 TEST_PATH="tests"
 TEST_FILES=$(shell test -d $(TEST_PATH) && find $(TEST_PATH) -type f -name "*.js")
 
 SOURCE_PATH="src"
 SOURCE_FILES=$(shell test -d $(SOURCE_PATH) && find $(SOURCE_PATH) -type f -name "*.js")
+
+MOCHA=node_modules/.bin/_mocha
 
 $(MOCHA): .build/install
 
@@ -51,6 +50,8 @@ $(JSBEAUTIFY): .build/install
 	$(eval FILES := $(filter-out .build/build $(JSBEAUTIFY), $?))
 	test "$(FILES)" = "" || $(JSBEAUTIFY) -r $(FILES)
 	touch $@
+
+ESLINT=node_modules/.bin/eslint
 
 $(ESLINT): .build/install
 
