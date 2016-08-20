@@ -1,6 +1,5 @@
 # node-project
-Empty node project
-
+Empty node project using continuous integration tools to ensure code quality.
 ## Make commands
 ### Install
 Install dependencies
