@@ -4,6 +4,9 @@ install: .build/install
 .PHONY: tests
 tests: .build/tests
 
+.PHONY: beautify
+beautify: .build/beautify
+
 .build/build: Makefile
 	mkdir -p .build && touch $@
 
@@ -22,4 +25,13 @@ $(MOCHA): .build/install
 
 .build/tests: .build/build $(MOCHA) $(TEST_FILES) $(SOURCE_FILES)
 	test "$(TEST_FILES)" = "" || $(MOCHA) $(TEST_FILES)
+	touch $@
+
+JSBEAUTIFY=node_modules/.bin/js-beautify
+
+$(JSBEAUTIFY): .build/install
+
+.build/beautify: .build/build $(JSBEAUTIFY) $(TEST_FILES) $(SOURCE_FILES)
+	$(eval FILES := $(filter-out .build/build $(JSBEAUTIFY), $?))
+	test "$(FILES)" = "" || $(JSBEAUTIFY) -r $(FILES)
 	touch $@

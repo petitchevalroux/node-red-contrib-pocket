@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/petitchevalroux/node-project#readme",
   "devDependencies": {
+    "js-beautify": "^1.6.3",
     "mocha": "^3.0.2"
   }
 }
