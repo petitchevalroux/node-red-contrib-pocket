@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Empty node project",
   "scripts": {
-    "test": "make test"
+    "test": "make tests"
   },
   "repository": {
     "type": "git",
