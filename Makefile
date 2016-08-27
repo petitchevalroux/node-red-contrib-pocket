@@ -77,4 +77,6 @@ coverage/lcov.info: .build/build $(ISTANBUL) $(TEST_FILES) $(SOURCE_FILES)
 coverage/lcov-report/index.html: coverage
 
 .build/check-coverage: .istanbul.yml coverage
-	$(ISTANBUL) check
+	test ! -f coverage/lcov.info || $(ISTANBUL) check
+	touch $@
+
