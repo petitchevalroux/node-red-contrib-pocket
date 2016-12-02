@@ -1,0 +1,45 @@
+<script type="text/javascript">
+    RED.nodes.registerType('pocket out',{
+        category: 'social-output',
+        color: '#f4f4f6',
+        defaults: {
+            name: {value:""}
+        },
+        icon: "pocket.png",
+        inputs: 1,
+        outputs: 0,
+        align: "right",
+        label: function() {
+            return this.name || "pocket out";
+        },
+        credentials: {
+            username: {type:"text"},
+            access_token: {type:"password"},
+            request_token: {type: "password"}
+        },
+        oneditprepare: function() {
+            if(this.credentials.username) {
+                $("#pocketUsername").html(this.credentials.username);
+            }
+            else {
+                $("#pocketUsername").html("");
+            }
+            $("#pocketLoginLink").attr("href","/pocket/"+encodeURIComponent(this.id)+"/auth");
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="pocket out">
+    <div class="form-row">
+        <label for="inputUsername"><i class="fa fa-user"></i> User</label>
+        <span class="input-xlarge uneditable-input" id="pocketUsername"></span> <a id="pocketLoginLink" class="btn" ><i class="fa fa-pencil"></i></a>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="pocket out">
+    <p>Pocket out node. Add the url in <code>msg.payload</code> to Pocket.</p></p>
+</script>
