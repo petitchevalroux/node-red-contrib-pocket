@@ -38,7 +38,7 @@ clean:
 TEST_PATH="tests"
 TEST_FILES=$(shell test -d $(TEST_PATH) && find $(TEST_PATH) -type f -name "*.js")
 
-SOURCE_PATH="src"
+SOURCE_PATH="pocket"
 SOURCE_FILES=$(shell test -d $(SOURCE_PATH) && find $(SOURCE_PATH) -type f -name "*.js")
 
 MOCHA=node_modules/.bin/_mocha
