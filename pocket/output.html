@@ -41,5 +41,13 @@
 </script>
 
 <script type="text/x-red" data-help-name="pocket out">
-    <p>Pocket out node. Add the url in <code>msg.payload</code> to Pocket.</p></p>
+    <p>Pocket out node. Add the url in <code>msg.payload</code> to Pocket.</p>
+    <p>Alternatively <code>msg.payload</code> can contain an object with the following properties:</p>
+    <ul>
+        <li><code>url</code> (mandatory) URL of the item you want to save</li>
+        <li><code>title</code> (optional) Can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</li>
+        <li><code>tags</code> (optional) comma-separated list of tags to apply to the item</li>
+        <li><code>tweet_id</code> (optional) If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id. This allows Pocket to show the original tweet alongside the article.</li>
+    </ul>
+    <p>For full documentation see <a href="https://getpocket.com/developer/docs/v3/add">Add Item</a>.</p>
 </script>
