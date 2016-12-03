@@ -10,5 +10,6 @@ docker run -it -p 1880:1880 -v /home/node-red:/data -u `id -u node-red` --name m
 ```
 
 ## Roadmap
-
+ * Use config node for credentials
  * Extract client api code to a new package
+
