@@ -46,7 +46,11 @@ function PocketClient(consumerKey) {
                     return;
                 }
                 if (response.statusCode !== 200) {
-                    var e = new Error("Non 200");
+                    var e = new Error("Non 200: " +
+                        JSON.stringify({
+                            "status": response.statusCode,
+                            "body": body
+                        }));
                     reject(e);
                     return;
                 }
@@ -233,6 +237,25 @@ function PocketClient(consumerKey) {
                 });
         });
         return p;
+    };
+
+    /**
+     * Modifying a User's Pocket Data
+     * doc: https://getpocket.com/developer/docs/v3/modify
+     * @param {string} accessToken
+     * @param {array} actions update action to perform, see doc
+     * @returns {Promise}
+     */
+    this.modify = function(accessToken, actions) {
+        var params = {
+            "consumer_key": this.consumerKey,
+            "access_token": accessToken,
+            "actions": actions
+        };
+        return this.query("send", params)
+            .then(function(response) {
+                return response;
+            });
     };
 }
 
