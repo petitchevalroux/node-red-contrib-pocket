@@ -210,8 +210,10 @@ function PocketClient(consumerKey) {
                         var items = [];
                         Object.getOwnPropertyNames(response.list)
                             .forEach(function(name) {
-                                items.push(response.list[
-                                    name]);
+                                if (name !== "length") {
+                                    items.push(response.list[
+                                        name]);
+                                }
                             });
                         // Sort items by sort_id
                         items.sort(function(a, b) {
