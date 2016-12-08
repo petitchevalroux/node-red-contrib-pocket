@@ -3,7 +3,8 @@
         category: 'social-output',
         color: '#f4f4f6',
         defaults: {
-            name: {value:""}
+            name: {value:""},
+            pocketCredentials: {type:"pocket-credentials",required:true}
         },
         icon: "pocket.png",
         inputs: 1,
@@ -11,32 +12,18 @@
         align: "right",
         label: function() {
             return this.name || "pocket out";
-        },
-        credentials: {
-            username: {type:"text"},
-            access_token: {type:"password"},
-            request_token: {type: "password"}
-        },
-        oneditprepare: function() {
-            if(this.credentials.username) {
-                $("#pocketUsername").html(this.credentials.username);
-            }
-            else {
-                $("#pocketUsername").html("");
-            }
-            $("#pocketLoginLink").attr("href","/pocket/"+encodeURIComponent(this.id)+"/auth");
         }
     });
 </script>
 
 <script type="text/x-red" data-template-name="pocket out">
-    <div class="form-row">
-        <label for="inputUsername"><i class="fa fa-user"></i> User</label>
-        <span class="input-xlarge uneditable-input" id="pocketUsername"></span> <a id="pocketLoginLink" class="btn" ><i class="fa fa-pencil"></i></a>
+     <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name">
     </div>
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <label for="node-input-pocketCredentials"><i class="fa fa-user"></i> Pocket's account</label>
+        <input type="text" id="node-input-pocketCredentials">
     </div>
 </script>
 

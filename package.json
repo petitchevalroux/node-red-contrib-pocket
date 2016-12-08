@@ -15,7 +15,8 @@
   ],
   "node-red": {
     "nodes": {
-      "pocket-output": "pocket/output.js"
+      "pocket-output": "pocket/output.js",
+      "pocket-credentials":"pocket/credentials.js"
     }
   },
   "author": "Patrick Poulain",

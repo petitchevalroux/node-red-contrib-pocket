@@ -3,76 +3,29 @@ var path = require("path");
 var PocketClient = require(path.join(__dirname, "client"));
 
 module.exports = function(RED) {
-    var client = new PocketClient("61039-15eaef932c93244d94399065");
-
-    // Define route in order to redirect user to pocket website for authentication
-    RED.httpAdmin.get("/pocket/:id/auth", function(req, res) {
-        var callbackUrl = req.protocol + "://" + req.get("host") +
-            "/pocket/" + encodeURIComponent(req.params.id) +
-            "/callback";
-        client.getRequestToken(callbackUrl)
-            .then(function(token) {
-                RED.nodes.addCredentials(req.params.id, {
-                    request_token: token
-                });
-                return client.getRedirectUrl(token, callbackUrl);
-            })
-            .then(function(redirectUrl) {
-                return res.redirect(redirectUrl);
-            })
-            .catch(function(error) {
-                RED.log.error(error);
-            });
-    });
-
-    // Callback route the visitor is returned from pocket website
-    RED.httpAdmin.get("/pocket/:id/callback", function(req, res) {
-        var credentials = RED.nodes.getCredentials(req.params.id);
-        if (credentials.request_token) {
-            client.getAccessToken(credentials.request_token)
-                .then(function(data) {
-                    RED.nodes.addCredentials(
-                        req.params.id, {
-                            username: data.username,
-                            access_token: data.access_token
-                        }
-                    );
-                    RED.nodes.getNode(req.params.id)
-                        .status({
-                            fill: "green",
-                            shape: "ring",
-                            text: "connected"
-                        });
-                    res.redirect(req.protocol + "://" + req.get(
-                        "host"));
-                    return data;
-                })
-                .catch(function(err) {
-                    RED.log.error(err);
-                    res.status(500)
-                        .send(JSON.stringify(err));
-                });
-        } else {
-            res.status(410)
-                .send("No request token");
-        }
-    });
-
-
     RED.nodes.registerType("pocket out", function(config) {
         RED.nodes.createNode(this, config);
         var node = this;
+        node.pocketCredentials = RED.nodes.getCredentials(config.pocketCredentials);
         this.on("input", function(msg) {
-            var credentials = RED.nodes.getCredentials(node
-                .id);
-            if (!credentials.access_token) {
+            var credentials = node.pocketCredentials;
+            if (!credentials.accessToken) {
                 node.status({
                     fill: "red",
                     shape: "dot",
-                    text: "not connected"
+                    text: "access token not found"
                 });
                 return;
             }
+            if (!credentials.consumerKey) {
+                node.status({
+                    fill: "red",
+                    shape: "dot",
+                    text: "consumer key not found"
+                });
+                return;
+            }
+            var client = new PocketClient(credentials.consumerKey);
             var toAdd = {};
             if (typeof(msg.payload) === "string") {
                 toAdd.url = msg.payload;
@@ -86,7 +39,7 @@ module.exports = function(RED) {
                     toAdd)
             });
             var timeout;
-            client.add(credentials.access_token, toAdd.url,
+            client.add(credentials.accessToken, toAdd.url,
                     toAdd.title, toAdd.tags, toAdd.tweet_id
                 )
                 .then(function(response) {
@@ -128,17 +81,5 @@ module.exports = function(RED) {
                         .info);
                 });
         });
-    }, {
-        credentials: {
-            username: {
-                type: "text"
-            },
-            access_token: {
-                type: "password"
-            },
-            request_token: {
-                type: "password"
-            }
-        }
     });
 };
