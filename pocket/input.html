@@ -1,0 +1,137 @@
+<script type="text/javascript">
+    RED.nodes.registerType('pocket in',{
+        category: 'social-input',
+        color: '#f4f4f6',
+        defaults: {
+            "name": {"value":""},
+            "pocketCredentials": {"type":"pocket-credentials","required":true},
+            "interval":{"value":""},
+            "state":{"value":""},
+            "favorite":{"value":""},
+            "tag":{value:""},
+            "contentType":{value:""},
+            "sort":{value:""},
+            "detailType":{value:""},
+            "search":{value:""},
+            "domain":{value:""},
+            "since":{value:""},
+            "count":{value:""},
+            "offset":{value:""}
+        },
+        icon: "pocket.png",
+        inputs: 0,
+        outputs: 1,
+        align: "right",
+        label: function() {
+            return this.name || "pocket in";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="pocket in">
+    <div class="form-row">
+        <label for="node-input-name">Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pocketCredentials"><i class="fa fa-user"></i> Pocket's account</label>
+        <input type="text" id="node-input-pocketCredentials">
+    </div>
+    <div class="form-row">
+        <label for="node-input-interval">Interval (seconds)</label>
+        <input type="text" id="node-input-interval">
+    </div>
+    <div class="form-row alert alert-warning">
+        <i class="fa fa-exclamation-triangle"></i> An interval value below 15 seconds can lead to <a href="https://getpocket.com/developer/docs/rate-limits">rate-limit</a> overage.
+    </div>
+    <div class="form-row">
+        <label for="node-input-state">State</label>
+        <select id="node-input-state">
+            <option value="">Default</option>
+            <option value="all">All</option>
+            <option value="archive">Archive</option>
+            <option value="unread">Unread</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-favorite">Favorite</label>
+        <select id="node-input-favorite">
+            <option value="">All</option>
+            <option value="0">Favorited</option>
+            <option value="1">Un-favorited</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-tag">Tag</label>
+        <input type="text" id="node-input-tag">
+    </div>
+    <div class="form-row">
+        <label for="node-input-contentType">Type</label>
+        <select id="node-input-contentType">
+            <option value="">All</option>
+            <option value="article">Article</option>
+            <option value="video">Video</option>
+            <option value="image">Image</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-sort">Type</label>
+        <select id="node-input-sort">
+            <option value="">Default</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="title">Title</option>
+            <option value="site">Site</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-detailType">Detail</label>
+        <select id="node-input-detailType">
+            <option value="">Default</option>
+            <option value="simple">Simple</option>
+            <option value="complete">Complete</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-domain">Domain</label>
+        <input type="text" id="node-input-domain">
+    </div
+    <div class="form-row">
+        <label for="node-input-since">Since (<a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>)</label>
+        <input type="text" id="node-input-since">
+    </div>
+    <div class="form-row">
+        <label for="node-input-count">Count</label>
+        <input type="text" id="node-input-count">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="pocket in">
+    <p>Pocket in node. Retrieve Pocket's item</p>
+    <p>If Interval is set, the node retrieve items since last call. Count and Offset parameters are ignored.</p>  
+    <p>For full documentation see <a href="https://getpocket.com/developer/docs/v3/retrieve">Retrieve Item</a>.</p>
+    <p><code>msg.payload</code> contain a Pocket's item like this one :</p>
+    <pre>
+{
+    &quot;item_id&quot;:&quot;1509478011&quot;,
+    &quot;resolved_id&quot;:&quot;1509478011&quot;,
+    &quot;given_url&quot;:&quot;http://petitchevalroux.net&quot;,
+    &quot;given_title&quot;:&quot;Patrick Poulain : developpeur web et surtout developpeur php&quot;,
+    &quot;favorite&quot;:&quot;0&quot;,
+    &quot;status&quot;:&quot;0&quot;,
+    &quot;time_added&quot;:&quot;1481276081&quot;,
+    &quot;time_updated&quot;:&quot;1481276081&quot;,
+    &quot;time_read&quot;:&quot;0&quot;,
+    &quot;time_favorited&quot;:&quot;0&quot;,
+    &quot;sort_id&quot;:0,
+    &quot;resolved_title&quot;:&quot;Patrick Poulain&quot;,
+    &quot;resolved_url&quot;:&quot;http://petitchevalroux.net&quot;,
+    &quot;excerpt&quot;:&quot;&quot;,
+    &quot;is_article&quot;:&quot;0&quot;,
+    &quot;is_index&quot;:&quot;1&quot;,
+    &quot;has_video&quot;:&quot;0&quot;,
+    &quot;has_image&quot;:&quot;0&quot;,
+    &quot;word_count&quot;:&quot;0&quot;
+}
+    </pre>
+</script>

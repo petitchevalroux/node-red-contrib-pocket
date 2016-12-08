@@ -39,7 +39,7 @@ function PocketClient(consumerKey) {
             var request = self.getRequest();
             request.post({
                 "uri": path,
-                body: JSON.stringify(data)
+                "body": JSON.stringify(data)
             }, function(error, response, body) {
                 if (error) {
                     reject(error);

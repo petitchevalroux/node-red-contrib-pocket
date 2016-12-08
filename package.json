@@ -16,6 +16,7 @@
   "node-red": {
     "nodes": {
       "pocket-output": "pocket/output.js",
+      "pocket-input": "pocket/input.js",
       "pocket-credentials":"pocket/credentials.js"
     }
   },
