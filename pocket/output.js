@@ -1,6 +1,7 @@
 "use strict";
 var path = require("path");
 var PocketClient = require(path.join(__dirname, "client"));
+var credentialsHelper = require(path.join(__dirname, "credentials-helper"));
 
 module.exports = function(RED) {
     RED.nodes.registerType("pocket out", function(config) {
@@ -8,21 +9,11 @@ module.exports = function(RED) {
         var node = this;
         node.pocketCredentials = RED.nodes.getCredentials(config.pocketCredentials);
         this.on("input", function(msg) {
-            var credentials = node.pocketCredentials;
-            if (!credentials.accessToken) {
-                node.status({
-                    fill: "red",
-                    shape: "dot",
-                    text: "access token not found"
-                });
-                return;
-            }
-            if (!credentials.consumerKey) {
-                node.status({
-                    fill: "red",
-                    shape: "dot",
-                    text: "consumer key not found"
-                });
+            node.pocketCredentials = RED.nodes.getCredentials(
+                config.pocketCredentials);
+            var credentials = credentialsHelper.getFromNode(
+                node);
+            if (credentials === null) {
                 return;
             }
             var client = new PocketClient(credentials.consumerKey);
