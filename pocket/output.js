@@ -51,8 +51,8 @@ module.exports = function(RED) {
                             text: "connected"
                         });
                     }, 5000);
-                    RED.log.info(
-                        "Item successfully added to Pocket: " +
+                    node.log(
+                        "item added " +
                         JSON.stringify(response));
                     return response;
                 })
@@ -67,9 +67,9 @@ module.exports = function(RED) {
                         text: "error adding " +
                             info
                     });
-                    RED.log.error(
-                        "Unable to add item to Pocket: "
-                        .info);
+                    node.error(
+                        "error adding " +
+                        info);
                 });
         });
     });
