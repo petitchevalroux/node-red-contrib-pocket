@@ -58,18 +58,16 @@ module.exports = function(RED) {
                 })
                 .catch(function(err) {
                     var info = JSON.stringify({
-                        "error": err,
+                        "error": err.message,
                         "item": toAdd
                     });
+                    var msg = "error adding " + info;
                     node.status({
                         fill: "red",
                         shape: "dot",
-                        text: "error adding " +
-                            info
+                        text: msg
                     });
-                    node.error(
-                        "error adding " +
-                        info);
+                    node.error(msg);
                 });
         });
     });
