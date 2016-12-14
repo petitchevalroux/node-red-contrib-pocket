@@ -79,16 +79,14 @@ module.exports = function(RED) {
                 1000);
             client.retrieve(credentials.accessToken, options)
                 .then(function(items) {
-                    var messages = [];
                     items.forEach(function(item) {
                         node.log("retrieved item " +
                             JSON.stringify(item)
                         );
-                        messages.push({
+                        node.send({
                             "payload": item
                         });
                     });
-                    node.send(messages);
                     node.nextFetchPocketItems();
                     return items;
                 })
