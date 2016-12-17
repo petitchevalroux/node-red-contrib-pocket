@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('pocket out',{
+    RED.nodes.registerType('pocket add',{
         category: 'social-output',
         color: '#f4f4f6',
         defaults: {
@@ -11,12 +11,12 @@
         outputs: 0,
         align: "right",
         label: function() {
-            return this.name || "pocket out";
+            return this.name || "pocket add";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="pocket out">
+<script type="text/x-red" data-template-name="pocket add">
      <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name">
@@ -27,7 +27,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="pocket out">
+<script type="text/x-red" data-help-name="pocket add">
     <p>Pocket out node. Add the url in <code>msg.payload</code> to Pocket.</p>
     <p>Alternatively <code>msg.payload</code> can contain an object with the following properties:</p>
     <ul>
