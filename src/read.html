@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('pocket in',{
+    RED.nodes.registerType('pocket read',{
         category: 'social-input',
         color: '#f4f4f6',
         defaults: {
@@ -23,12 +23,12 @@
         outputs: 1,
         align: "right",
         label: function() {
-            return this.name || "pocket in";
+            return this.name || "pocket read";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="pocket in">
+<script type="text/x-red" data-template-name="pocket read">
     <div class="form-row">
         <label for="node-input-name">Name</label>
         <input type="text" id="node-input-name">
@@ -106,7 +106,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="pocket in">
+<script type="text/x-red" data-help-name="pocket read">
     <p>Pocket in node. Retrieve Pocket's item</p>
     <p>If Interval is set, the node retrieve items since last call. Count and Offset parameters are ignored.</p>  
     <p>For full documentation see <a href="https://getpocket.com/developer/docs/v3/retrieve">Retrieve Item</a>.</p>
