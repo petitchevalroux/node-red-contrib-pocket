@@ -15,7 +15,7 @@
   ],
   "node-red": {
     "nodes": {
-      "pocket-output": "src/output.js",
+      "pocket-add": "src/output.js",
       "pocket-read": "src/read.js",
       "pocket-credentials":"src/credentials.js",
       "pocket-modify":"src/modify.js"
