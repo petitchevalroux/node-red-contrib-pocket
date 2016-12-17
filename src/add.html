@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('pocket add',{
+        category: 'social-output',
+        color: '#f4f4f6',
+        defaults: {
+            name: {value:""},
+            pocketCredentials: {type:"pocket-credentials",required:true}
+        },
+        icon: "pocket.png",
+        inputs: 1,
+        outputs: 0,
+        align: "right",
+        label: function() {
+            return this.name || "pocket add";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="pocket add">
+     <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pocketCredentials"><i class="fa fa-user"></i> Pocket's account</label>
+        <input type="text" id="node-input-pocketCredentials">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="pocket add">
+    <p>Add items to Pocket. Add url in <code>msg.payload</code> to Pocket.</p>
+    <p>Alternatively <code>msg.payload</code> can contain an object with the following properties:</p>
+    <ul>
+        <li><code>url</code> (mandatory) URL of the item you want to save</li>
+        <li><code>title</code> (optional) Can be included for cases where an item does not have a title, which is typical for image or PDF URLs. If Pocket detects a title from the content of the page, this parameter will be ignored.</li>
+        <li><code>tags</code> (optional) comma-separated list of tags to apply to the item</li>
+        <li><code>tweet_id</code> (optional) If you are adding Pocket support to a Twitter client, please send along a reference to the tweet status id. This allows Pocket to show the original tweet alongside the article.</li>
+    </ul>
+    <p>For full documentation see <a href="https://getpocket.com/developer/docs/v3/add">Add Item</a>.</p>
+</script>

@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-pocket",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "NodeRed node that wrap Pocket API's (formerly known as Read It Later)",
   "scripts": {
     "test": "make tests"
@@ -15,7 +15,10 @@
   ],
   "node-red": {
     "nodes": {
-      "pocket-output": "pocket/output.js"
+      "pocket-add": "src/output.js",
+      "pocket-read": "src/read.js",
+      "pocket-credentials": "src/credentials.js",
+      "pocket-modify": "src/modify.js"
     }
   },
   "author": "Patrick Poulain",
