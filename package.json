@@ -17,7 +17,8 @@
     "nodes": {
       "pocket-output": "pocket/output.js",
       "pocket-input": "pocket/input.js",
-      "pocket-credentials":"pocket/credentials.js"
+      "pocket-credentials":"pocket/credentials.js",
+      "pocket-modify":"pocket/modify.js"
     }
   },
   "author": "Patrick Poulain",

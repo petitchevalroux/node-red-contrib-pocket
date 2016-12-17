@@ -1,0 +1,33 @@
+<script type="text/javascript">
+    RED.nodes.registerType('pocket modify',{
+        category: 'social-output',
+        color: '#f4f4f6',
+        defaults: {
+            name: {value:""},
+            pocketCredentials: {type:"pocket-credentials",required:true}
+        },
+        icon: "pocket.png",
+        inputs: 1,
+        outputs: 0,
+        align: "right",
+        label: function() {
+            return this.name || "pocket modify";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="pocket modify">
+     <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pocketCredentials"><i class="fa fa-user"></i> Pocket's account</label>
+        <input type="text" id="node-input-pocketCredentials">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="pocket modify">
+    <p>Pocket modify node. Modify a Pocket's item to Pocket.</p>
+    <p><code>msg.payload</code> must contain a JSON array according to <a href="https://getpocket.com/developer/docs/v3/modify">Modify Pocket's item</a></p>
+</script>
