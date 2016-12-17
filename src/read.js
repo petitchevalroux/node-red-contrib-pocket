@@ -4,7 +4,7 @@ var PocketClient = require(path.join(__dirname, "client"));
 var credentialsHelper = require(path.join(__dirname, "credentials-helper"));
 
 module.exports = function(RED) {
-    RED.nodes.registerType("pocket in", function(config) {
+    RED.nodes.registerType("pocket read", function(config) {
         RED.nodes.createNode(this, config);
         var node = this;
         node.pocketCredentials = RED.nodes.getCredentials(config.pocketCredentials);
